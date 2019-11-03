@@ -151,12 +151,12 @@ public class Usuario {
         PreparedStatement sentencia = null;
         try {
             sentencia = Conexion.abrirConexion().prepareStatement(
-                    "select * from usuario"
+                    "select * from usuario limit "+limiteDeRegistro+" "
             );
-            sentencia.setMaxRows(limiteDeRegistro);
             ResultSet resultado = sentencia.executeQuery();
+            //sentencia.setMaxRows(limiteDeRegistro);
 
-            while ((resultado.next() => limiteDeRegistro)) {
+            while (resultado.next()) {
                 Usuario usuario = new Usuario(
                         resultado.getString("identidad"),
                         resultado.getString("nombre_usuario"),
